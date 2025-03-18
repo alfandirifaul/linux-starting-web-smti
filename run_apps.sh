@@ -24,6 +24,13 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# Start the frontend development
+npm run dev & DEV_PID=$!
+if [ $? -ne 0 ]; then
+  echo "Failed to start the Laravel development server."
+  exit 1
+fi
+
 # Get the server's IP address
 ip_address=$(ip addr show | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $2}' | cut -d/ -f1 | head -n 1)
 
