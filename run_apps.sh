@@ -26,8 +26,9 @@ fi
 
 # Start the frontend development
 npm run dev & DEV_PID=$!
+echo $DEV_PID > dev_pid.txt
 if [ $? -ne 0 ]; then
-  echo "Failed to start the Laravel development server."
+  echo "Failed to start the Frontend development server."
   exit 1
 fi
 
