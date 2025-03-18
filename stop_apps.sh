@@ -1,7 +1,22 @@
 #!/bin/bash
 
 # Display waiting message
-echo "Please wait, the process is starting..."
+echo "Please wait, the process is running..."
+
+if [ -f "dev_pid.txt" ]; then
+  # Read the PID from the file
+  DEV_PID=$(cat dev_pid.txt)
+
+  # Kill the process
+  kill $DEV_PID
+
+  # Verify if the process was killed
+  if [ $? -eq 0 ]; then
+    rm dev_pid.txt
+  fi
+else
+  echo "PID file not found. npm run dev might not be running."
+fi
 
 # Kill any process using port 8000
 fuser -k 8000/tcp
